@@ -6,7 +6,7 @@ from calculate_metrics import calculate_metrics
 if __name__ == '__main__':
 
     # PARAMETERS TO CHANGE
-    n_epochs = 5
+    n_epochs = 100
     DEBUG = True
     train_device = 'cuda:0'
     test_device = 'cpu'
@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
 
     # name of results file containing number of epochs 
-    results_file = 'results_' + str(n_epochs) + '.txt'
+    results_file = 'results_' + str(n_epochs) + '.csv'
 
     unet_models = {"Without Batch Normalization": UNet_original(),
                    "With Single Batch Normalization": UNet_single_batchnorm(),
