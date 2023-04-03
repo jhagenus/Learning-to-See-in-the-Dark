@@ -60,3 +60,4 @@ if __name__ == '__main__':
     results_file = 'results_40.csv'
     model_name = 'Without Normalization'
     calculate_metrics(results_file=results_file, model_name=model_name)   
+    print("\nFinished calculating the metrics!\n")
