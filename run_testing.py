@@ -29,4 +29,4 @@ if __name__ == '__main__':
         result_folder = folder_name + '_' + str(n_epochs) + '_epochs'
         test_sony(model, result_folder, DEBUG=True, device=test_device)
         
-        calculate_metrics(results_file=results_file, model_name=model_name)
+        calculate_metrics(results_file=results_file, model_name=model_name, result_folder=result_folder)

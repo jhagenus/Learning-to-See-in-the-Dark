@@ -10,9 +10,9 @@ from skimage.metrics import peak_signal_noise_ratio as psnr, structural_similari
 from utils import calculate_psnr, calculate_ssim
 
 
-def calculate_metrics(results_file, model_name):
+def calculate_metrics(results_file, model_name, result_folder):
 
-    result_dir = './result_Sony/final/'
+    result_dir = './results/' + result_folder + '/' # Path to the result directory
 
     total_psnr = 0
     total_ssim = 0
