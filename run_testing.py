@@ -11,7 +11,7 @@ if __name__ == '__main__':
     n_epochs = 10
     DEBUG = True
     train_device = 'cuda:0'
-    test_device = 'cuda:0'
+    test_device = 'cpu'
     ######################
 
 
@@ -31,15 +31,15 @@ if __name__ == '__main__':
 
         torch.cuda.empty_cache()
 
-        print("\nStart training for model: '", model_name, "' with ", n_epochs, " epochs\n")
+        print("\nStart training for model: '" + model_name + "' with " + str(n_epochs) + " epochs\n")
         train_sony(model, n_epochs=n_epochs, DEBUG=DEBUG, TRAIN_FROM_SCRATCH=True, device=train_device, model_name=result_folder)
 
         torch.cuda.empty_cache()
 
-        print("\nStart testing for model: '", model_name, "' with ", n_epochs, " epochs\n")
+        print("\nStart testing for model: '" + model_name + "' with " + str(n_epochs) + " epochs\n")
         test_sony(model, result_folder, DEBUG=True, device=test_device)
 
         torch.cuda.empty_cache()
 
-        print("\nStart calculating metrics for model: '", model_name, "' with ", n_epochs, " epochs\n")
+        print("\nStart calculating metrics for model: '" + model_name + "' with " + str(n_epochs) + " epochs\n")
         calculate_metrics(results_file=results_file, model_name=model_name, result_folder=result_folder)
