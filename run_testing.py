@@ -7,7 +7,7 @@ import torch
 if __name__ == '__main__':
 
     # PARAMETERS TO CHANGE
-    n_epochs = 100
+    n_epochs = 10
     DEBUG = True
     train_device = 'cuda:0'
     test_device = 'cuda:0'
