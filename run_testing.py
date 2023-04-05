@@ -3,6 +3,7 @@ from train_Sony import train_sony
 from test_Sony import test_sony
 from calculate_metrics import calculate_metrics
 import torch
+import os
 
 if __name__ == '__main__':
 
@@ -24,15 +25,17 @@ if __name__ == '__main__':
     
 
     for folder_name, model, model_name in unet_models:
-        torch.cuda.empty_cache()
-
-        print("\nStart training for model: '", model_name, "' with ", n_epochs, " epochs\n")
-        train_sony(model, n_epochs=n_epochs, DEBUG=DEBUG, TRAIN_FROM_SCRATCH=True, device=train_device)
-
-        torch.cuda.empty_cache()
 
         # name of folder to store results
         result_folder = folder_name + '_' + str(n_epochs) + '_epochs'
+
+        torch.cuda.empty_cache()
+
+        print("\nStart training for model: '", model_name, "' with ", n_epochs, " epochs\n")
+        train_sony(model, n_epochs=n_epochs, DEBUG=DEBUG, TRAIN_FROM_SCRATCH=True, device=train_device, model_name=result_folder)
+
+        torch.cuda.empty_cache()
+
         print("\nStart testing for model: '", model_name, "' with ", n_epochs, " epochs\n")
         test_sony(model, result_folder, DEBUG=True, device=test_device)
 

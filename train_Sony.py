@@ -33,13 +33,13 @@ def loss_function(out_image, gt_image):
     return loss
 
 
-def train_sony(unet, n_epochs=40, DEBUG=True, TRAIN_FROM_SCRATCH=False, device='cuda:0'):
+def train_sony(unet, model_name, n_epochs=40, DEBUG=True, TRAIN_FROM_SCRATCH=False, device='cuda:0'):
     """Function to train the model"""
 
     # Required paths to the datasets
     input_dir = './dataset/Sony/short/' # Path to the short exposure images
     gt_dir = './dataset/Sony/long/' # Path to the long exposure images
-    checkpoint_dir = './result_Sony/' # Path to the checkpoint directory
+    checkpoint_dir = './trained_models/' # Path to the checkpoint directory
     result_dir = './result_Sony/' # Path to the result directory
 
     # get train IDs
@@ -58,6 +58,10 @@ def train_sony(unet, n_epochs=40, DEBUG=True, TRAIN_FROM_SCRATCH=False, device='
     if TRAIN_FROM_SCRATCH:
         if os.path.isdir(result_dir):
             shutil.rmtree(result_dir)
+    
+    # create result directory if it does not exist
+    if not os.path.isdir(checkpoint_dir):
+        os.makedirs(checkpoint_dir)
 
     # Raw data takes long time to load. Keep them in memory after loaded.
     gt_images = [None] * 6000
@@ -180,7 +184,7 @@ def train_sony(unet, n_epochs=40, DEBUG=True, TRAIN_FROM_SCRATCH=False, device='
                 Image.fromarray((temp * 255).astype(np.uint8)).save(result_dir + '%04d/%05d_00_train_%d.jpg' % (epoch, train_id, ratio)) # Save the image
 
         # Save the model
-        torch.save(unet.state_dict(), checkpoint_dir + 'model.ckpt')
+        torch.save(unet.state_dict(), checkpoint_dir + model_name + '.ckpt')
 
     print("\nFinished training!\n")
 

@@ -36,10 +36,10 @@ def test_sony(unet, result_folder, DEBUG=True, device='cuda:0'):
     # Required paths to the datasets
     input_dir = './dataset/Sony/short/' # Path to the short exposure images
     gt_dir = './dataset/Sony/long/' # Path to the long exposure images
-    checkpoint_dir = './result_Sony/' # Path to the checkpoint directory
+    checkpoint_dir = './trained_models/' # Path to the checkpoint directory
     # result_dir = './result_Sony/final/' # Path to the result directory
     result_dir = './results/' + result_folder + '/' # Path to the result directory
-    ckpt = checkpoint_dir + 'model.ckpt' # Path to the model
+    ckpt = checkpoint_dir + result_folder + '.ckpt' # Path to the model
 
     # get test IDs
     test_fns = glob.glob(gt_dir + '/1*.ARW')
