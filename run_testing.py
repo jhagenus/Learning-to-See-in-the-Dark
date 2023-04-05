@@ -10,7 +10,7 @@ if __name__ == '__main__':
     n_epochs = 100
     DEBUG = True
     train_device = 'cuda:0'
-    test_device = 'cpu'
+    test_device = 'cuda:0'
     ######################
 
 
