@@ -8,8 +8,8 @@ import os
 if __name__ == '__main__':
 
     # PARAMETERS TO CHANGE
-    n_epochs = 10
-    DEBUG = True
+    n_epochs = 1001
+    DEBUG = False
     train_device = 'cuda:0'
     test_device = 'cpu'
     ######################
@@ -29,15 +29,15 @@ if __name__ == '__main__':
         # name of folder to store results
         result_folder = folder_name + '_' + str(n_epochs) + '_epochs'
 
-        torch.cuda.empty_cache()
+        # torch.cuda.empty_cache()
 
-        print("\nStart training for model: '" + model_name + "' with " + str(n_epochs) + " epochs\n")
-        train_sony(model, n_epochs=n_epochs, DEBUG=DEBUG, TRAIN_FROM_SCRATCH=True, device=train_device, model_name=result_folder)
+        # print("\nStart training for model: '" + model_name + "' with " + str(n_epochs) + " epochs\n")
+        # train_sony(model, n_epochs=n_epochs, DEBUG=DEBUG, TRAIN_FROM_SCRATCH=True, device=train_device, model_name=result_folder)
 
         torch.cuda.empty_cache()
 
         print("\nStart testing for model: '" + model_name + "' with " + str(n_epochs) + " epochs\n")
-        test_sony(model, result_folder, DEBUG=True, device=test_device)
+        test_sony(model, result_folder, DEBUG=DEBUG, device=test_device)
 
         torch.cuda.empty_cache()
 

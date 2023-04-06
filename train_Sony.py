@@ -46,6 +46,8 @@ def train_sony(unet, model_name, n_epochs=40, DEBUG=True, TRAIN_FROM_SCRATCH=Fal
     train_fns = glob.glob(gt_dir + '0*.ARW')
     train_ids = [int(os.path.basename(train_fn)[0:5]) for train_fn in train_fns]
 
+    print('total_images: ', len(train_ids))
+
     ps = 512  # patch size for training
     save_freq = 500 
 
