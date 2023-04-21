@@ -158,9 +158,6 @@ From the quantative and qualitative analysis, we can conclude that batch normali
 | Writing training procedure        | x      |      |      |
 | Writing results                   |        |      | x    |
 | Writing discussion and conclusion | x      |      |      |
-:::info
-**Find this document incomplete?** Leave a comment!
-:::
 
 <!-- ###### tags: `Documentation` -->
 
