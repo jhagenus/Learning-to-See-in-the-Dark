@@ -85,7 +85,7 @@ All experiments have been applied to the entire ‘Sony’ dataset that was used
 
 
 ### <a id="head44"></a>Training procedure
-To train our model, we first started by running the code locally on our own devices. The code includes a built-in debug feature to ensure that the model runs smoothly. Numerous variables play a role in the training process, including batch size, total number of epochs, and dataset size. In PyTorch users can choose to use either CPU or CUDA cores. For our training, we utilized CUDA cores because this will significantly reduce the training time over using CPU cores. However, for model testing, we used CPU cores not because this is faster but testing all images required more than 64GB of RAM. After the code was running perfectly, we switched to using Google Cloud for training the model. We utilized Google Cloud with a Nvidia T4 GPU with 16GB of RAM and a 16-core CPU and 104GB of RAM. The original paper used 4000 epochs to train the model. However, due to budget constraints and time considerations, we opted to set the total number of epochs for the final three models to 1000. The size of the input dataset is another parameter that affects the training process. The final model was trained on the entire 'Sony' dataset of 161 unique images, the remaining of the images in the dataset were used for validation and testing purposes. 
+To train our model, we first started by running the code locally on our own devices. The code includes a built-in debug feature to ensure that the model runs smoothly. Numerous variables play a role in the training process, including batch size, total number of epochs, and dataset size. In PyTorch users can choose to use either CPU or CUDA cores. For our training, we utilized CUDA cores because this will significantly reduce the training time over using CPU cores. However, for model testing, we used CPU cores not because this is faster but testing all images required more than 64GB of RAM. After the code was running perfectly, we switched to using Google Cloud for training the model. We utilized Google Cloud with a Nvidia T4 GPU with 16GB of RAM and a 16-core CPU and 104GB of RAM. The original paper used 4000 epochs to train the model. However, due to budget constraints and time considerations, we opted to set the total number of epochs for the final three models to 1000. The size of the input dataset is another parameter that affects the training process. The final model was trained on the entire 'Sony' dataset of 161 unique images, the remaining of the images in the dataset were used for validation and testing purposes. For the loss we utilized a Mean Absolute Error (MAE) loss function, which calculates the absolute difference between the predicted and ground truth images and is commonly used in image-to-image translation tasks, including the base model we built upon. 
 
 
 ## <a id="head5"></a>Results
@@ -144,7 +144,20 @@ From the quantative and qualitative analysis, we can conclude that batch normali
 
 
 ## <a id="head8"></a>Appendix and FAQ
-
+| Task                              | Jeroen | Daan | Kane |
+|-----------------------------------|--------|------|------|
+| Reimplantation in pytorch         | x      | x    | x    |
+| Add single batch normalisation    | x      | x    | x    |
+| Add double batch normalisation    | x      | x    | x    |
+| Run the model in Google cloud     | x      | x    | x    |
+| Writing introduction              | x      |      |      |
+| Writing theory                    |        |      | x    |
+| Writing deep learning framework   |        | x    |      |
+| Writing network architecture      |        | x    |      |
+| Writing experiments               |        | x    |      |
+| Writing training procedure        | x      |      |      |
+| Writing results                   |        |      | x    |
+| Writing discussion and conclusion | x      |      |      |
 :::info
 **Find this document incomplete?** Leave a comment!
 :::
