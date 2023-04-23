@@ -1,8 +1,3 @@
----
-title: 'Blog post'
-disqus: hackmd
----
-
 Group 7 - Reproduction of the paper 'Learning to See in the Dark'
 ===
 
