@@ -20,20 +20,22 @@ Daan Scherrenburg, 5175151, d.j.scherrenburg@student.tudelft.nl
     * [Experiments](#head43)
     * [Training procedure](#head44)
 * [Results](#head5) 
-* [Conclusion and Discussion](#head6) 
+* [Conclusion & discussion](#head6) 
 * [References](#head7) 
-* [Appendix and FAQ](#head8) 
+* [Division of tasks](#head8) 
 
 ## <a id="head1"></a>Sources
-**Paper**: https://cchen156.github.io/paper/18CVPR_SID.pdf
 
-**Data**: https://github.com/cchen156/Learning-to-See-in-the-Dark
+**Original paper:**
 
-**Github**: https://github.com/cchen156/Learning-to-See-in-the-Dark
+- Paper: https://cchen156.github.io/paper/18CVPR_SID.pdf
+- Data: https://github.com/cchen156/Learning-to-See-in-the-Dark
+- Github: https://github.com/cchen156/Learning-to-See-in-the-Dark
+- Paper website: https://cchen156.github.io/SID.html
 
-**Paper website**: https://cchen156.github.io/SID.html
+**Our reproduction:**
 
-**Our Github**: https://github.com/jhagenus/ProjectDeepLearning
+- Github: https://github.com/jhagenus/ProjectDeepLearning
 
 
 ## <a id="head2"></a>Introduction
@@ -60,12 +62,12 @@ To validate the results of the processed images, two assessment metrics were emp
 ## <a id="head4"></a>Method
 In this section, we will explain the changes that we made on the original model for the reproduction and what experiments and training procedure we executed to validate whether the changes should be kept. 
 
-### <a id="head41"></a>Deep learning framework
+### <a id="head41"></a>Deep Learning Framework
 The first major change to the original code is the deep learning framework. We decided to change the deep learning framework from TensorFlow version 1 to PyTorch. Both TensorFlow and PyTorch are popular frameworks for deep learning projects. However, they have slightly different use cases due to their different functionality.
 The main reason for switching to PyTorch is that this framework is more intuitive to most developers. PyTorch is very well integrated in the Python language, this is the reason that using PyTorch feels more familiar. TensorFlow has a steeper learning curve, because most developers need to get familiar with this framework first. Because of this more intuitive feel of PyTorch, it is the preferred framework for developing rapid prototypes and research projects. [[3]]
 
 
-### <a id="head42"></a>Network architecture
+### <a id="head42"></a>Network Architecture
 As explained in the ‘Theory’ section of this blogpost, the original code makes use of a fully-convolutional network (FCN) to perform the entire image processing pipeline. We decided to maintain most of this network the same as the writers of this original code probably performed a lot of validation in defining this network. However, we wanted to try to change something to the original network to see whether we could improve the results or to validate that this change should not be applied. We decided to apply Batch Normalization to the fully-convolutional network. 
 
 Batch Normalization (BN) has been a proven method to improve certain methods. BN is introduced in the paper ‘Batch normalization: Accelerating deep network training by reducing internal covariate shift’ by S. Ioffe and C. Szegedy.[[4]] This paper has, according to Google Scholar, been cited over 45000 times since then. BN can have several benefits. The first benefit is that it could speed up training of the model. This is because BN makes sure that the input has a similar distribution for every layer. Besides, BN can act as a form of regularization that can result in the model being less likely to overfit. Finally, BN can improve the performance of the model. BN can help to reduce the impact of noise in the image, resulting in a better reconstruction and therefore a better PSNR score. [[5]]
@@ -84,8 +86,12 @@ The third experiment will be applying BN after every single convolutional layer.
 All experiments have been applied to the entire ‘Sony’ dataset that was used by the original paper. We decided to decrease the number of epochs to 1000 compared to the 4000 epochs of the original paper. The reason for this decrease was the training time. Training all three models on all data for 1000 epochs already took over 17 hours, so we simply did not have enough time and credits to run the models for all 4000 epochs. We will try to make a fair comparison using these results. 
 
 
-### <a id="head44"></a>Training procedure
-To train our model, we first started by running the code locally on our own devices. The code includes a built-in debug feature to ensure that the model runs smoothly. Numerous variables play a role in the training process, including batch size, total number of epochs, and dataset size. In PyTorch users can choose to use either CPU or CUDA cores. For our training, we utilized CUDA cores because this will significantly reduce the training time over using CPU cores. However, for model testing, we used CPU cores not because this is faster but testing all images required more than 64GB of RAM. After the code was running perfectly, we switched to using Google Cloud for training the model. We utilized Google Cloud with a Nvidia T4 GPU with 16GB of RAM and a 16-core CPU and 104GB of RAM. The original paper used 4000 epochs to train the model. However, due to budget constraints and time considerations, we opted to set the total number of epochs for the final three models to 1000. The size of the input dataset is another parameter that affects the training process. The final model was trained on the entire 'Sony' dataset of 161 unique images, the remaining of the images in the dataset were used for validation and testing purposes. For the loss we utilized a Mean Absolute Error (MAE) loss function, which calculates the absolute difference between the predicted and ground truth images and is commonly used in image-to-image translation tasks, including the base model we built upon. 
+### <a id="head44"></a>Training Procedure
+To train our model, we first started by running the code locally on our own devices. The code includes a built-in debug feature to ensure that the model runs smoothly. Numerous variables play a role in the training process, including batch size, total number of epochs, and dataset size. 
+
+In PyTorch users can choose to use either CPU or CUDA cores. For our training, we utilized CUDA cores because this will significantly reduce the training time over using CPU cores. However, for model testing, we used CPU cores not because this is faster but testing all images required more than 64GB of RAM. After the code was running perfectly, we switched to using Google Cloud for training the model. We utilized Google Cloud with a Nvidia T4 GPU with 16GB of RAM and a 16-core CPU and 104GB of RAM. The original paper used 4000 epochs to train the model. However, due to budget constraints and time considerations, we opted to set the total number of epochs for the final three models to 1000. The size of the input dataset is another parameter that affects the training process. The final model was trained on the entire 'Sony' dataset of 161 unique images, the remaining of the images in the dataset were used for validation and testing purposes. 
+
+For the loss we, just like in the original paper, utilized a Mean Absolute Error (MAE) loss function, which calculates the absolute difference between the predicted and ground truth images and is commonly used in image-to-image translation tasks. 
 
 
 ## <a id="head5"></a>Results
@@ -143,7 +149,8 @@ From the quantative and qualitative analysis, we can conclude that batch normali
 [[5]] M. Chablani. *Batch Normalization*. Towardsdatascience, 2017.
 
 
-## <a id="head8"></a>Appendix and FAQ
+### <a id="head8"></a>Division of Tasks
+
 | Task                              | Jeroen | Daan | Kane |
 |-----------------------------------|--------|------|------|
 | Reimplantation in pytorch         | x      | x    | x    |
